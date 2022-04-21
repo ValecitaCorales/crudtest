@@ -1,32 +1,25 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>
-      Ingrese Informacion !! 
-    </ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="logout()">
+        <ion-icon slot="icon-only" name="log-out"></ion-icon>
+       
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Mi perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
-    <ion-item *ngFor="let user of users"  (click)="openNote(note)" >
-      <ion-label>
-        Nombre :{{user.nameC}}
-        <br>
-        Rut : {{user.rut}}
-        <br>
-        Ocupacion : {{user.ocupacion}}
-        <br>
-        Mascota : {{user.mascota}}
-      </ion-label>
-    </ion-item>
-  </ion-list>
+<ion-content class="ion-padding">
+  <div class="preview">
+    <ion-avatar (click)="changeImage()">
+      <img *ngIf="profile?.imageUrl; else placeholder_avatar;" [src]="profile.imageUrl">
+      <ng-template #placeholder_avatar>
+        <div class="fallback">
+          <p>Selecciona Avatar</p>
+        </div>
+      </ng-template>
+    </ion-avatar>
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed"> 
-    <ion-fab-button (click)="addUser()">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-
-
-
+  </div>
 </ion-content>

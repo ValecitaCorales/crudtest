@@ -1,65 +1,57 @@
 import { Component } from '@angular/core';
-import { AlertController } from '@ionic/angular';
-import { DataService } from '../service/data.service';
+import { Router } from '@angular/router';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { AlertController ,LoadingController } from '@ionic/angular';
+import { AuthService } from '../service/auth.service';
+import { AvatarService } from '../service/avatar.service';
 
 @Component({
   selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  templateUrl: './home.page.html',
+  styleUrls: ['./home.page.scss'],
 })
-export class HomePage {
+export class HomePage  {
+  profile = null;
+  constructor(
+    private avatarService: AvatarService,
+    private authService: AuthService,
+    private router: Router,
+    private loadingController: LoadingController,
+    private alertController : AlertController
 
-  users = [];
+  ) {
+    this.avatarService.getUserProfile().subscribe((data => {
+      this.profile = data;
+    }));
+  }
 
-  constructor(private dataService : DataService , private alertCtrl : AlertController) 
-  {
-    this.dataService.getUser().subscribe(res =>{
-      console.log(res);
-      this.users = res;
-    })
+  async logout(){
+    await this.authService.logout();
+    this.router.navigateByUrl('/', {replaceUrl:true});
   }
-  openNote(note){
-  }
-async addUser(){
-  const alert = await this.alertCtrl.create({
-    header :'Agrege Usuario',
-    inputs: [
-      {
-        name : 'nameC',
-        placeholder: 'Ingrese Nombre Completo',
-        type:'text'
-      },
-      {
-        name : 'rut',
-        placeholder: 'Ingrese Rut',
-        type:'text'
-      },
-      {
-        name : 'ocupacion',
-        placeholder: 'Ingrese Ocupacion',
-        type:'text'
-      },
-      {
-        name : 'mascota',
-        placeholder: 'Ingrese mascota',
-        type:'text'
-      }
-    ],
-    buttons:[
-      {
-        text : 'Cancelar',
-        role : 'cancel'
-      },
-      {
-        text: 'Agregar',
-        handler: (res) => {
-          this.dataService.addUser({nameC: res.nameC , rut : res.rut , ocupacion : res.ocupacion , mascota : res.mascota })
+    async changeImage(){
+      const image = await Camera.getPhoto({
+        quality:90,
+        allowEditing: false,
+        resultType: CameraResultType.Base64,
+        source: CameraSource.Photos, 
+      });
+      console.log(image); //para ver si carga la img
+      if (image){
+        const loading = await this.loadingController.create();
+        await loading.present();
+  
+        const result = await this.avatarService.uploadImage(image);
+        loading.dismiss();
+  
+        if(!result){
+          const alert = await this.alertController.create({
+            header: 'No se pudo subir la imagen',
+            message: 'Hubo un problema',
+            buttons: ['Aceptar'],
+          });
+          await alert.present();
         }
       }
-    ]
-  });
-  await alert.present();
-}
-
-
-}
+    }
+  }
