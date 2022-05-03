@@ -6,20 +6,40 @@
        
       </ion-button>
     </ion-buttons>
-    <ion-title>Mi perfil</ion-title>
+    <ion-title>FindPets</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <div class="preview">
-    <ion-avatar (click)="changeImage()">
-      <img *ngIf="profile?.imageUrl; else placeholder_avatar;" [src]="profile.imageUrl">
-      <ng-template #placeholder_avatar>
-        <div class="fallback">
-          <p>Selecciona Avatar</p>
-        </div>
-      </ng-template>
-    </ion-avatar>
-
+<ion-content >
+  <div id="somos">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>¿Quienes Somos?</ion-card-subtitle>
+      </ion-card-header>
+    
+      <ion-card-content>
+      Aqui en FindPets queremos lo mejor para las mascostas, podrás adoptar, subir alguna mascota perdida o incluso encontrar la tuya.
+      </ion-card-content>
+    </ion-card>
   </div>
+  
+  <ion-card>
+    <ion-card-content>
+      Conoce mas sobre la fundación 
+      <a href="https://www.instagram.com/opapenablanca/?hl=es">
+        <img alt="" src="assets/img/instagram.svg"
+        width="30" height="30">
+      </a> 
+    </ion-card-content>
+  </ion-card>
+  <ion-label class="ion-text-center">
+    <h2>Empezamos?</h2>
+  </ion-label>
+  <div id="content" class="ion-text-center">
+  
+    <ion-button color="secondary" expand="block" class="btn btn1" (click)="aaaa()"><img src="../assets/img/iniciar.png" style="width : 40% ; height : 100%">Adoptar</ion-button>
+
+    <ion-button color="secondary" expand="block" class="btn btn1" (click)="perdido()"><img src="../assets/img/registrar.png" style="width : 45% ; height : 100%">Perdido</ion-button>
+  </div>
+
 </ion-content>

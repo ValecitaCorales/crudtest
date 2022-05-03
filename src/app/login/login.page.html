@@ -1,10 +1,16 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
 
+
+
+      
 <ion-content class="ion-padding">
+  <ion-row></ion-row>
+   <ion-row></ion-row>
+      <ion-img src="assets/img/FindPetsICON.png"></ion-img>
+      <div id="label">
+        <ion-label>Iniciar Sesion</ion-label>
+        <ion-row></ion-row>
+     </div>
+  
   <form [formGroup]="credentials" (ngSubmit)="login()"> 
     
     <ion-item fill ="solid" class="ion-margin-bottom">
@@ -18,10 +24,14 @@
     </ion-item>
 
 
-
-    <ion-button expand="full" type="submit"  [disabled]="!credentials.valid">login</ion-button>
-    <ion-button expand ="full" type="button" (click)="register()">Crear una cuenta</ion-button>
-
+    <div id="content" class="ion-text-center">
+    <ion-button expand="block" type="submit"  [disabled]="!credentials.valid">Ingresar
+      <img src="../assets/img/iniciar.png" style="width : 40% ; height : 100%">
+    </ion-button>
+    <ion-button expand="block" type="button" (click)="register()">Registrar
+      <img src="../assets/img/registrar.png" style="width : 150% ; height : 100%">
+    </ion-button>
+  </div>
   </form>
 
 </ion-content>

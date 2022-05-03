@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { DataService } from '../service/data.service';
 
@@ -7,7 +7,7 @@ import { DataService } from '../service/data.service';
   templateUrl: 'form.page.html',
   styleUrls: ['form.page.scss'],
 })
-export class FormPage {
+export class FormPage implements OnInit {
 
   users = [];
 
@@ -17,6 +17,8 @@ export class FormPage {
       console.log(res);
       this.users = res;
     })
+
+   
   }
   openNote(note){
   }
@@ -60,6 +62,7 @@ async addUser(){
   });
   await alert.present();
 }
-
+ngOnInit() {
+}
 
 }
