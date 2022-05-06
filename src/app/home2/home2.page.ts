@@ -27,7 +27,7 @@ export class Home2Page  {
 
   async logout(){
     await this.authService.logout();
-    this.router.navigateByUrl('/', {replaceUrl:true});
+    this.router.navigateByUrl('/home', {replaceUrl:true});
   }
     async changeImage(){
       const image = await Camera.getPhoto({

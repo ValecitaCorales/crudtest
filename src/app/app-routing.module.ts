@@ -19,22 +19,22 @@ const routes: Routes = [
     ...canActivate(redirectUnauthorizedToLogin)
   
   },
-  
-  {
-    path: 'form',
-    loadChildren: () => import('./form/form.module').then( m => m.FormPageModule),
-    
-  
-  },
+
+
   {
     path: 'home2',
-    loadChildren: () => import('./extraviado/home2.module').then( m => m.Home2PageModule)
+    loadChildren: () => import('./home2/home2.module').then( m => m.Home2PageModule)
+  },
+  
+  {
+    path: 'adoptame',
+    loadChildren: () => import('./adoptame/adoptame.module').then( m => m.AdoptamePageModule)
   },
   {
     path: '**',
     redirectTo: '',
     pathMatch: 'full'
-  }
+  },
 
 ];
 

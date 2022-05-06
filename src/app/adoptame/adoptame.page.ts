@@ -1,27 +1,40 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { DataService } from '../service/data.service';
+import { Router} from '@angular/router';
+import { AuthService } from '../service/auth.service';
+
 
 @Component({
-  selector: 'app-form',
-  templateUrl: 'form.page.html',
-  styleUrls: ['form.page.scss'],
+  selector: 'app-adoptame',
+  templateUrl: './adoptame.page.html',
+  styleUrls: ['./adoptame.page.scss'],
 })
-export class FormPage implements OnInit {
+export class AdoptamePage {
 
   users = [];
 
-  constructor(private dataService : DataService , private alertCtrl : AlertController) 
+  constructor(private dataService : DataService ,
+               private alertCtrl : AlertController,
+               private router: Router,
+               private authService: AuthService,) 
   {
     this.dataService.getUser().subscribe(res =>{
       console.log(res);
       this.users = res;
     })
 
-   
+  
+  
   }
   openNote(note){
   }
+
+  async logout(){
+    await this.authService.logout();
+    this.router.navigateByUrl('/', {replaceUrl:true});}
+
+
 async addUser(){
   const alert = await this.alertCtrl.create({
     header :'Agrege Usuario',
@@ -62,7 +75,6 @@ async addUser(){
   });
   await alert.present();
 }
-ngOnInit() {
-}
+
 
 }

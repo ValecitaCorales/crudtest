@@ -22,10 +22,11 @@ export class HomePage {
     await this.authService.logout();
     this.router.navigateByUrl('/', {replaceUrl:true});}
 
+
   adoptar(){
     let navigationExtras: NavigationExtras={
      }
-  this.router.navigate(['/form'], navigationExtras);
+  this.router.navigate(['/adoptame'], navigationExtras);
 }
     
 
@@ -37,11 +38,6 @@ export class HomePage {
     this.router.navigate(['/home2'], navigationExtras);
   }
 
-  aaaa(){
-    let navigationExtras: NavigationExtras={
-     }
-  this.router.navigate(['/form'], navigationExtras);
-}
-    
+
 
 }
