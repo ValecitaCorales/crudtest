@@ -4,11 +4,16 @@
       <ion-button (click)="logout()">
         <ion-icon slot="icon-only" name="log-out"></ion-icon>
       </ion-button>
-      <ion-button expand="block" class="btn btn1" (click)="perfil()"><img src="../assets/img/iniciar.png" style="width : 40% ; height : 100%"></ion-button>
-    
+      <ion-title>FindPets</ion-title>
+ 
+        <ion-button (click)="perfil()">
+          <ion-icon name="person-circle-outline"></ion-icon>
+        </ion-button>
+      
+ 
     </ion-buttons>
+   
 
-    <ion-title>FindPets</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -29,9 +34,8 @@
     <ion-card-content>
       Conoce mas sobre la fundación 
       <a href="https://www.instagram.com/opapenablanca/?hl=es">
-        <img alt="" src="assets/img/instagram.svg"
-        width="30" height="30">
       </a> 
+      <ion-icon name="logo-instagram"></ion-icon>
     </ion-card-content>
   </ion-card>
   <ion-label class="ion-text-center">
@@ -39,9 +43,12 @@
   </ion-label>
   <div id="content" class="ion-text-center">
   
-    <ion-button color="secondary" expand="block" class="btn btn1" (click)="adoptar()"><img src="../assets/img/iniciar.png" style="width : 40% ; height : 100%">Adoptar</ion-button>
+    <ion-button color="secondary" expand="block" class="btn btn1" (click)="adoptar()">
+      <ion-icon name="paw-outline"></ion-icon> Adoptar
+      </ion-button>
 
-    <ion-button color="secondary" expand="block" class="btn btn1" (click)="perdido()"><img src="../assets/img/registrar.png" style="width : 45% ; height : 100%">Perdido</ion-button>
+    <ion-button color="secondary" expand="block" class="btn btn1" (click)="perdido()">
+      <ion-icon name="heart-half-outline"></ion-icon>Perdido</ion-button>
   </div>
 
 </ion-content>

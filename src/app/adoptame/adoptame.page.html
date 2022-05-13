@@ -1,39 +1,77 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar >
     <ion-buttons slot="start">
       <ion-button (click)="logout()">
         <ion-icon slot="icon-only" name="log-out"></ion-icon>
-       
       </ion-button>
+      <ion-title>FindPets</ion-title>
+
     </ion-buttons>
-    <ion-title>FindPets</ion-title>
+
+    
+
+  
   </ion-toolbar>
 </ion-header>
+<ion-content>
+  <ion-row></ion-row>
+  <ion-row></ion-row> 
+  <div class="ion-text-center">
+    <ion-card>
+      <ion-row></ion-row>
+      <ion-card-header>
+        <ion-card-subtitle>¿Estas pensando en adoptar?</ion-card-subtitle>
+      </ion-card-header>
+    
+      <ion-card-content>
+      Aqui podras ver todas las mascotas disponibles para adoptar.
+      </ion-card-content>
+    </ion-card>
+  </div>
 
-<ion-content class="ion-padding">
+<ion-slides [options]="option" class="ion-margin-top">
+
+  <ion-slide>
+    <ion-card>
+      <img src="assets/img/cat1.jpg">
+    </ion-card>
+  </ion-slide>
+
+  <ion-slide>
+    <ion-card>
+      <img src="assets/img/cat2.jpg">
+    </ion-card>
+  </ion-slide>
+
+  <ion-slide>
+    <ion-card>
+      <img src="assets/img/dog1.jpg">
+    </ion-card>
+  </ion-slide>
+
+  <ion-slide>
+    <ion-card>
+      <img src="assets/img/dog2.jpg">
+    </ion-card>
+  </ion-slide>
+
   
- <ion-card>   
-  <div id="somos">
-      <ion-list>
-        <ion-item *ngFor="let user of users"  (click)="openNote(note)" >
-          <ion-label>
-            
-            Nombre :{{user.nameC}}
-            <br>
-            Rut : {{user.rut}}
-            <br>
-            Ocupacion : {{user.ocupacion}}
-            <br>
-            Mascota : {{user.mascota}}
-          </ion-label>
-        </ion-item>
-      </ion-list>
 
-      <ion-fab vertical="bottom" horizontal="end" slot="fixed"> 
-        <ion-fab-button (click)="addUser()">
-          <ion-icon name="add"></ion-icon>
-        </ion-fab-button>
-      </ion-fab>
-    </div>
-  </ion-card> 
+
+</ion-slides>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed"> 
+  <ion-fab-button (click)="addUser()">
+    <ion-icon name="logo-octocat"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+<ion-fab vertical="bottom" horizontal="start" slot="fixed"> 
+  <ion-fab-button  (click)="volver()" >
+    <ion-icon name="arrow-undo-circle-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
+
 </ion-content>
+
+

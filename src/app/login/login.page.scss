@@ -12,38 +12,43 @@ ion-item{
     border-radius: 30px !important;
     width: 250px;
     border-color: black!important;
+    background: #62E8E0;
 }
-.iniciarid{
-    margin: auto;
-    border-radius: 30px !important;
 
-    height: 50px;
-    width: 150px;
-    font-size: 18px;
-    text-transform: initial;
-    color: white!important;
-    border-color: black!important;
+ion-title.title-large {
+        color: #B05993;
+        border-color: black!important;
+        font-size: 30px;
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+ion-header{
+    --background: #62E8E0;
+
 }
 ion-content{
-    --background: #F6E43E;
+    --background: #62E8E0;
 
 }
 ion-button {
     margin: auto;
-    border-radius: 10px !important;
+    border-radius: 10px;
     margin-top: 10px;
     height: 50px;
     width: 180px;
     font-size: 18px;
     text-transform: initial;
-    color: black!important;
-    border-color: black!important;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
-    
+    color: black;
+    border-color: #B05993;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    --background: #B05993;
   }
 ion-label{
     font-size: 35px;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+ion-input{
+    color:#B05993
 }
 
 ion-row{

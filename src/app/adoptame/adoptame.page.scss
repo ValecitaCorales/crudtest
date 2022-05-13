@@ -1,40 +1,58 @@
-ion-card {
-    border-radius:30px !important;
-    }
-ion-label {
-    
+ion-toolbar{
+  --background: #62E8E0;
+}
+ion-title{
+  color: #B05993;
+  border-color: black;
+  font-size: 30px;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+
+ion-card{
+  border-radius:30px !important;
+  --background: #B05993;
+  color: white;
+  }
+
+ion-img {
+    max-width: 30%;
+    padding: 1rem;
     margin: 0 auto;
     float: center;
-}    
-
+}
+ion-label{
+  max-width: 30%;
+  padding: 4rem;
+  margin: 0 auto;
+  float: center;
+}
 
 ion-content{
-    --background: #B05993;
-  
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  ion-toolbar{
-    background: #B05993;
-  }
-  ion-button {
-    margin: auto;
-    border-radius: 10px;
-    margin-top: 10px;
-    height: 50px;
-    width: 180px;
-    font-size: 18px;
-    text-transform: initial;
-    color: black;
-    border-color: #62E8E0;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    --background: #62E8E0;
-  }
+  --background: #62E8E0!important;
+}
 
-.somos{
-  color: #B05993 !important;
+ion-button {
+  margin: auto;
+  border-radius: 10px !important;
+  margin-top: 10px;
+  height: 50px;
+  width: 180px;
+  font-size: 18px;
+  text-transform: initial;
+  color: black!important;
+  border-color: #B05993;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  --background: #B05993;
+}
+
+ion-card-subtitle{
+  color: whitesmoke;
+  
+}
+
+ion-card-header{
+  color: #9b4e81;
+  --background: #9b4e81;
 }
 

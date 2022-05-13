@@ -39,10 +39,11 @@
    </ion-card>
    <ion-row></ion-row>
    <ion-row></ion-row>
-   <div id="content" class="ion-text-center">
-   
-     <ion-button  expand="block" class="btn btn1" (click)="volver()"><img src="../assets/img/registrar.png" style="width : 40% ; height : 100%">Volver</ion-button>
-   </div>
+   <ion-fab vertical="bottom" horizontal="start" slot="fixed"> 
+    <ion-fab-button  (click)="volver()" >
+      <ion-icon name="arrow-undo-circle-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
  
  </ion-content>
  

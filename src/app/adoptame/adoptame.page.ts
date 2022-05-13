@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { DataService } from '../service/data.service';
-import { Router} from '@angular/router';
+import { NavigationExtras, Router} from '@angular/router';
 import { AuthService } from '../service/auth.service';
 
 
@@ -17,23 +17,34 @@ export class AdoptamePage {
   constructor(private dataService : DataService ,
                private alertCtrl : AlertController,
                private router: Router,
-               private authService: AuthService,) 
+               private authService: AuthService,
+               ) 
+               
   {
     this.dataService.getUser().subscribe(res =>{
       console.log(res);
       this.users = res;
     })
-
   
+    
+    
   
   }
+
+  
   openNote(note){
+  }
+
+  volver(){
+    let navigationExtras: NavigationExtras={
+    
+    }
+    this.router.navigate(['../home'], navigationExtras);
   }
 
   async logout(){
     await this.authService.logout();
     this.router.navigateByUrl('/', {replaceUrl:true});}
-
 
 async addUser(){
   const alert = await this.alertCtrl.create({
@@ -74,6 +85,15 @@ async addUser(){
     ]
   });
   await alert.present();
+}
+
+option ={
+  slidesPerView: 1.5,
+  centeredSlides: true,
+  loop: true,
+  spaceBetween: 10,
+  autoplay: true, 
+
 }
 
 
