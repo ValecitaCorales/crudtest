@@ -37,6 +37,12 @@ export class HomePage {
     }
     this.router.navigate(['/home2'], navigationExtras);
   }
+  perfil(){
+    let navigationExtras: NavigationExtras={
+    
+    }
+    this.router.navigate(['../perfil'], navigationExtras);
+  }
 
 
 

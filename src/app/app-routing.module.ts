@@ -31,6 +31,10 @@ const routes: Routes = [
     loadChildren: () => import('./adoptame/adoptame.module').then( m => m.AdoptamePageModule)
   },
   {
+    path: 'perfil',
+    loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
+  },
+  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full'
