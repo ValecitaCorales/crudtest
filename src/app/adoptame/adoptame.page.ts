@@ -48,7 +48,7 @@ export class AdoptamePage {
 
 async addUser(){
   const alert = await this.alertCtrl.create({
-    header :'Agrege Usuario',
+    header :'Formulario de Adopcion',
     inputs: [
       {
         name : 'nameC',
@@ -61,8 +61,43 @@ async addUser(){
         type:'text'
       },
       {
+        name : 'estadoC',
+        placeholder: 'Ingrese estado civil',
+        type:'text'
+      },
+      {
         name : 'ocupacion',
         placeholder: 'Ingrese Ocupacion',
+        type:'text'
+      },
+      {
+        name : 'direccion',
+        placeholder: 'Ingrese Direccion',
+        type:'text'
+      },
+      {
+        name : 'tipocasa',
+        placeholder: 'Indique Casa PROPIA/ARRENDADA',
+        type:'text'
+      },
+      {
+        name : 'permiso',
+        placeholder: 'tiene permiso SI/NO ',
+        type:'text'
+      },
+      {
+        name : 'integrantesHogar',
+        placeholder: 'Numero integrantes del hogar',
+        type:'text'
+      },
+      {
+        name : 'telefono',
+        placeholder: 'Ingrese Numero de telefono',
+        type:'text'
+      },
+      {
+        name : 'email',
+        placeholder: 'Ingrese imail que se REGISTRO',
         type:'text'
       },
       {
@@ -79,7 +114,9 @@ async addUser(){
       {
         text: 'Agregar',
         handler: (res) => {
-          this.dataService.addUser({nameC: res.nameC , rut : res.rut , ocupacion : res.ocupacion , mascota : res.mascota })
+          this.dataService.addUser({nameC: res.nameC , rut : res.rut ,estadoC :res.estadoC, ocupacion : res.ocupacion ,
+            direccion:res.direccion,tipocasa: res.tipocasa,permiso: res.permiso,integrantesHogar: res.integrantesHogar,
+            telefono:res.telefono,email:res.email, mascota : res.mascota })
         }
       }
     ]

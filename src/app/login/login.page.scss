@@ -44,8 +44,10 @@ ion-button {
     --background: #B05993;
   }
 ion-label{
+    margin: center;
     font-size: 35px;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color:#B05993
 }
 ion-input{
     color:#B05993

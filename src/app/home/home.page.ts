@@ -10,13 +10,15 @@ import { AuthService } from '../service/auth.service';
 })
 export class HomePage {
 
-
+ 
   constructor(private router: Router,
-    private authService: AuthService,) { 
-    
+    private authService: AuthService,
+ 
+    ) { 
+   
   }
 
-
+ 
 
   async logout(){
     await this.authService.logout();
@@ -28,7 +30,7 @@ export class HomePage {
      }
   this.router.navigate(['/adoptame'], navigationExtras);
 }
-    
+
 
 
   perdido(){

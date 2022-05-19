@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
-import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { AlertController ,LoadingController } from '@ionic/angular';
 import { DataService } from 'src/app/service/data.service';
 import { AuthService } from '../service/auth.service';
@@ -12,19 +11,19 @@ import { AvatarService } from '../service/avatar.service';
   styleUrls: ['./perfil.page.scss'],
 })
 export class PerfilPage {
-  users = [];
+  perfil = [];
 
   constructor( 
     private avatarService: AvatarService,
     private authService: AuthService,
     private router: Router,
     private loadingController: LoadingController,
-    private alertController : AlertController,
+    private alertCtrl : AlertController,
    private dataService : DataService )
   {
-    this.dataService.getUser().subscribe(res =>{
+    this.dataService.getProfile().subscribe(res =>{
       console.log(res);
-      this.users = res;
+      this.perfil = res;
     })
   }
   async logout(){
@@ -37,69 +36,55 @@ export class PerfilPage {
     }
     this.router.navigate(['../home'], navigationExtras);
   }
-  async changeImage(){
-    const image = await Camera.getPhoto({
-      quality:90,
-      allowEditing: false,
-      resultType: CameraResultType.Base64,
-      source: CameraSource.Photos, 
-    });
-    console.log(image); //para ver si carga la img
-    if (image){
-      const loading = await this.loadingController.create();
-      await loading.present();
-
-      const result = await this.avatarService.uploadImage(image);
-      loading.dismiss();
-
-      if(!result){
-        const alert = await this.alertController.create({
-          header: 'No se pudo subir la imagen',
-          message: 'Hubo un problema',
-          buttons: ['Aceptar'],
-        });
-        await alert.present();
-      }
-    }
-}
 
 
-  openNote(note){
+ openNote(note){
   }
-async addUser(){
-  const alert = await this.alertController.create({
-    header :'Agregue Usuario',
-    inputs: [
-      {
-        name : 'nameC',
-        placeholder: 'Ingrese Nombre Completo',
-        type:'text'
-      },
-      {
-        name : 'rut',
-        placeholder: 'Ingrese Rut',
-        type:'text'
-      },
-      {
-        name : 'ocupacion',
-        placeholder: 'Ingrese Ocupacion',
-        type:'text'
-      },
-      {
-        name : 'celular',
-        placeholder: 'Número contacto',
-        type:'number'
-      },
-      
-      {
-        name : 'mascota',
-        placeholder: 'Ingrese mascota',
-        type:'text'
-      }
-    ],
-    
-  });
-  await alert.present();
-}
+  async addProfile(){
+    const alert = await this.alertCtrl.create({
+      header :'Confirme sus Datos',
+      inputs: [
+        {
+          name : 'namep',
+          placeholder: 'Ingrese Nombre Completo',
+          type:'text'
+        },
+        {
+          name : 'edad',
+          placeholder: 'Ingrese edad',
+          type:'text'
+        },
+        {
+          name : 'telefono',
+          placeholder: 'Ingrese Nnumero telefonico',
+          type:'text'
+        },
+        {
+          name : 'email',
+          placeholder: 'Confirme Correo ',
+          type:'text'
+        },
+      ],
+      buttons:[
+        {
+          text : 'Cancelar',
+          role : 'cancel'
+        },
+        {
+          text: 'Agregar',
+          handler: (res) => {
+            this.dataService.addProfile({ namep : res.namep , edad : res.edad , telefono : res.telefono, email: res.email})
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+ async getProfileById(id){
+   return this.dataService.addProfile
+
+ }
+
 
 }
