@@ -81,10 +81,5 @@ export class PerfilPage {
     await alert.present();
   }
 
- async getProfileById(id){
-   return this.dataService.addProfile
-
- }
-
 
 }
