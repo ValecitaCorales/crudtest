@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../service/auth.service';
+import { InteracionService } from '../../service/interacion.service';
 import { Router } from '@angular/router';
-import { AlertController, LoadingController } from '@ionic/angular';
-import { AuthService } from '../service/auth.service';
+
 
 @Component({
   selector: 'app-login',
@@ -10,15 +10,15 @@ import { AuthService } from '../service/auth.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  credentials: FormGroup;
-  constructor(
-    private fb : FormBuilder,
-    private loadingController : LoadingController,
-    private alertController : AlertController,
-    private authService: AuthService,
-    private router :Router 
-  ) { }
+  credenciales = {
+    correo : null,
+    password : null
+  }
 
+  constructor(private auth:AuthService,
+              private interacion : InteracionService,
+              private router : Router ) { }
+/*
   get email(){
     return this.credentials.get('email');
   }
@@ -26,15 +26,32 @@ export class LoginPage implements OnInit {
   get password(){
     return this.credentials.get('password');
   }
-
+ */
   ngOnInit() {
-    this.credentials = this.fb.group({
+   /* this.credentials = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-    });
+    });*/
+
   }
 
-  async register(){
+async login(){
+  await this.interacion.presentLoading('Ingresando..')
+ console.log('credenciales ->',this.credenciales); 
+  const res = await this.auth.login(this.credenciales.correo,this.credenciales.password).catch(error => {
+    console.log('error');
+    this.interacion.closeLoading();
+    this.interacion.presentToast('Usuario o Contraseña Invalido')
+  })
+  if (res){
+    console.log('res ->',res);
+    this.interacion.closeLoading();
+    this.interacion.presentToast('Ingresado Con exito');
+    this.router.navigate(['/home'])
+  }
+}
+
+  /*async register(){
     const loading = await this.loadingController.create();
     await loading.present();
 
@@ -71,5 +88,9 @@ export class LoginPage implements OnInit {
     });
     await alert.present();
   }
+
+
+*/
+
 
 }

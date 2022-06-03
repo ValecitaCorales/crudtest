@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { AlertController ,LoadingController } from '@ionic/angular';
-import { AuthService } from '../service/auth.service';
-import { AvatarService } from '../service/avatar.service';
-import { DataService } from '../service/data.service';
+import { AuthService } from '../../service/auth.service';
+import { AvatarService } from '../../service/avatar.service';
+import { DataService } from '../../service/data.service';
+
 
 @Component({
   selector: 'app-home2',
@@ -12,7 +13,7 @@ import { DataService } from '../service/data.service';
   styleUrls: ['./home2.page.scss'],
 })
 export class Home2Page  {
-  perdidos = [];
+
   profile = null;
   constructor(
     private avatarService: AvatarService,
@@ -23,13 +24,7 @@ export class Home2Page  {
     private dataService : DataService ,
 
   ) {
-    this.avatarService.getUserProfile().subscribe((data => {
-      this.profile = data;
-    }));
-    this.dataService.getFind().subscribe(res => {
-      console.log(res);
-      this.perdidos = res;
-    })
+    
   }
   volver(){
     let navigationExtras: NavigationExtras={
@@ -38,7 +33,7 @@ export class Home2Page  {
     this.router.navigate(['../home'], navigationExtras);
   }
 
-  async addFind(){
+ async addFind(){
     const alert = await this.alertController.create({
       header :'Ingrese animal perdido',
       inputs: [
@@ -94,7 +89,7 @@ export class Home2Page  {
 
 
   async logout(){
-    await this.authService.logout();
+    await this.authService.logut();
     this.router.navigateByUrl('/home', {replaceUrl:true});
   }
     async changeImage(){

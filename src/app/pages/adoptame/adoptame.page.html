@@ -1,17 +1,20 @@
-<ion-header>
-  <ion-toolbar >
-    <ion-buttons slot="start">
-      <ion-button (click)="logout()">
-        <ion-icon slot="icon-only" name="log-out"></ion-icon>
-      </ion-button>
-      <ion-title>FindPets</ion-title>
 
+
+<ion-header>
+  
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
+    <ion-title>FindPets</ion-title>
+
+  </ion-toolbar>
+     
 
     
 
   
-  </ion-toolbar>
 </ion-header>
 <ion-content>
   <ion-row></ion-row>
@@ -62,7 +65,7 @@
 </ion-slides>
 
 <ion-fab vertical="bottom" horizontal="end" slot="fixed"> 
-  <ion-fab-button (click)="addUser()">
+  <ion-fab-button (click)="addAdop">
     <ion-icon name="logo-octocat"></ion-icon>
   </ion-fab-button>
 </ion-fab>

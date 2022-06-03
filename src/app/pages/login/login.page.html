@@ -1,0 +1,28 @@
+   
+<ion-content class="ion-padding">
+  <ion-row></ion-row>
+   <ion-row></ion-row>
+      <ion-img src="assets/img/FindPetsICON.png"></ion-img>
+      <div id="label" class="ion-text-center">
+        <ion-label >FindPets</ion-label>
+        <ion-row></ion-row>
+     </div>
+  
+     <ion-item>
+       <ion-label>Correo</ion-label>
+       <ion-input [(ngModel)]="credenciales.correo"></ion-input>
+     </ion-item>
+     <ion-item>
+      <ion-label>Contraseña</ion-label>
+      <ion-input [(ngModel)]="credenciales.password"></ion-input>
+    </ion-item>
+   
+
+    <ion-button (click)="login()">
+      Ingresar 
+    </ion-button>
+    <ion-button [routerLink]="['/registro']" routerLinkActive="router-link-active" >
+      o registrate
+    </ion-button>
+
+</ion-content>

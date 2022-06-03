@@ -1,6 +1,6 @@
 import { Component} from '@angular/core';
 import { NavigationExtras, Router} from '@angular/router';
-import { AuthService } from '../service/auth.service';
+import { AuthService } from '../../service/auth.service';
 
 
 @Component({
@@ -21,7 +21,7 @@ export class HomePage {
  
 
   async logout(){
-    await this.authService.logout();
+    await this.authService.logut();
     this.router.navigateByUrl('/', {replaceUrl:true});}
 
 

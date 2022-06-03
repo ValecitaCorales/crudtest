@@ -77,11 +77,4 @@ try{
 }
 }
 
-async getAll(collection) {
-  try {
-    return await this.fireStore.collection(collection).snapshotChanges();
-  } catch (error) {
-    console.log("error en: getAll ", error)
-  }
-}
 }

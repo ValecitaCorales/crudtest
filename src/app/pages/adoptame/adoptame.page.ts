@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { DataService } from '../service/data.service';
+import { DataService } from '../../service/data.service';
 import { NavigationExtras, Router} from '@angular/router';
-import { AuthService } from '../service/auth.service';
+import { AuthService } from '../../service/auth.service';
 
 
 @Component({
@@ -12,7 +12,7 @@ import { AuthService } from '../service/auth.service';
 })
 export class AdoptamePage {
 
-  users = [];
+  
 
   constructor(private dataService : DataService ,
                private alertCtrl : AlertController,
@@ -21,10 +21,8 @@ export class AdoptamePage {
                ) 
                
   {
-    this.dataService.getUser().subscribe(res =>{
-      console.log(res);
-      this.users = res;
-    })
+    
+    
   
     
     
@@ -43,10 +41,10 @@ export class AdoptamePage {
   }
 
   async logout(){
-    await this.authService.logout();
+    await this.authService.logut();
     this.router.navigateByUrl('/', {replaceUrl:true});}
 
-async addUser(){
+async addAdop(){
   const alert = await this.alertCtrl.create({
     header :'Formulario de Adopcion',
     inputs: [
@@ -106,19 +104,20 @@ async addUser(){
         type:'text'
       }
     ],
+
     buttons:[
-      {
-        text : 'Cancelar',
-        role : 'cancel'
-      },
-      {
-        text: 'Agregar',
-        handler: (res) => {
-          this.dataService.addUser({nameC: res.nameC , rut : res.rut ,estadoC :res.estadoC, ocupacion : res.ocupacion ,
-            direccion:res.direccion,tipocasa: res.tipocasa,permiso: res.permiso,integrantesHogar: res.integrantesHogar,
-            telefono:res.telefono,email:res.email, mascota : res.mascota })
+        {
+          text : 'Cancela',
+          role : 'cancel'
+        },
+        {
+          text: 'Agregar',
+          handler: (res) => {
+            this.dataService.addAdop({nameC: res.nameC , rut : res.rut ,estadoC :res.estadoC, ocupacion : res.ocupacion ,
+              direccion:res.direccion,tipocasa: res.tipocasa,permiso: res.permiso,integrantesHogar: res.integrantesHogar,
+              telefono:res.telefono,email:res.email, mascota : res.mascota })
+          }
         }
-      }
     ]
   });
   await alert.present();

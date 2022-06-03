@@ -1,41 +1,43 @@
 import { Injectable } from '@angular/core';
-import { Auth, 
-  createUserWithEmailAndPassword, 
-  signInWithEmailAndPassword, 
-  signOut } from '@angular/fire/auth';
+import { AngularFireAuth, } from '@angular/fire/compat/auth';
+import { UserI } from '../models/models';
+
 
 
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class AuthService {
 
-  constructor( private auth:Auth) { }
+  constructor(private authfirebase: AngularFireAuth) { }
 
-    async register ({email, password}){
-      try {
-        const user= await createUserWithEmailAndPassword(
-          this.auth,email, password); //función para registrarse
-          return user;
-        
-      } catch (e) {
-        return null; 
-      }   
+  login(correo: string, password: string) {
+    return  this.authfirebase.signInWithEmailAndPassword(correo, password)
+  }
+
+  logut() {
+    this.authfirebase.signOut();
+  }
+
+  registarUser(datos : UserI){
+    return this.authfirebase.createUserWithEmailAndPassword(datos.correo,datos.password);
+ }
+
+  stateUser(){
+    return this.authfirebase.authState
+  }
+
+  async getUid(){
+   const user = await this.authfirebase.currentUser;
+   if(user){
+   return user.uid;
+   }else{
+     return null;
+   }
+  }
+
+  
+    
     }
-
-    async login ({email, password}){
-        try {
-          const user= await signInWithEmailAndPassword(
-            this.auth,email, password); //función para entrar a la app
-            return user;
-          
-        } catch (e) {
-          return null;
-        }   
-    }
-
-    logout(){
-      return signOut(this.auth);
-    }
-
-}
