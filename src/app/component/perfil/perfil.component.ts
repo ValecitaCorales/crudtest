@@ -31,7 +31,7 @@ listaUsuarios = [];
       console.log('En perfil - estado de autenticacion',res);
       this.getUid();
    });
-   this.firestore.getAll('usuarios').then(firebaseResponse => {
+   this.firestore.getAll('Usuarios').then(firebaseResponse => {
     firebaseResponse.subscribe(listaDeUsuariosRef => {
 
       this.listaUsuarios = listaDeUsuariosRef.map(usuarioRef => {
@@ -80,7 +80,27 @@ obtenerPorId(id) {
   })
 }
 
-
+async getDatosUser(uid: string) {
+  const path = 'Usuarios';
+  const uiE = await this.authService.getUid();
+  this.firestore.getUser().subscribe( res => {
+      //console.log('datos -> ', res);
+      if (res) {
+        //res.find['uid'];
+        console.log('getDatosUser --> ',res);
+       
+        res.forEach(uiseruid => {
+          
+          
+          if (uiE  == uiseruid.uid ) {
+          
+            console.log('Si', uiseruid.correo,uiseruid.nombre);
+              return uiseruid.correo;
+          } 
+        });
+      }
+  })
+}
 
 }
 /*this.firestore.getUser().subscribe(res => {

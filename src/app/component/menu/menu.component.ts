@@ -13,11 +13,12 @@ import { InteracionService } from '../../service/interacion.service';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
 })
+
 export class MenuComponent implements OnInit {
 
   login: boolean = false;
   rol: 'visitante' = null;
-
+  uid: string = null;
 
   constructor(public popoverController: PopoverController,
               private auth: AuthService,
@@ -52,14 +53,37 @@ export class MenuComponent implements OnInit {
 
   }
 
-  getDatosUser(uid: string) {
+  async getDatosUser(uid: string) {
     const path = 'Usuarios';
-    const id = uid;
+    const uiE = await this.auth.getUid();
     this.firestore.getUser().subscribe( res => {
-        console.log('datos -> ', res);
+        //console.log('datos -> ', res);
         if (res) {
-        
+          //res.find['uid'];
+          console.log('getDatosUser --> ',res);
+         
+          res.forEach(uiseruid => {
+            
+            
+            if (uiE  == uiseruid.uid ) {
+            
+              console.log('Si', uiseruid.correo,uiseruid.nombre);
+
+            } 
+          });
         }
     })
   }
+
+  async getUid(){
+    const uid = await this.auth.getUid();
+    if(uid){
+      this.uid =uid;
+      console.log('uid ->',this.uid);
+      return this.uid;  
+     }else {
+      console.log('No existe Id');
+  }
+}
+
 }

@@ -16,14 +16,15 @@
 
 
 <ion-content>
-<h6>Lista de Usuarios </h6>
-<ul>
-  <li *ngFor="let user of listaUsuarios" (click)="obtenerPorId(user.id)">{{user.correo}},{{user.nombre}}</li>
-  
-  <ion-button >
-      Ingresar 
-    </ion-button>
-</ul>
+<h6>Tus datos Son </h6>
+ 
+  <ion-item>
+    <ion-label>Correo</ion-label>
+    
+  </ion-item>
+  <ion-button  (click)="getDatosUser(uie)"></ion-button>
+ 
+
 
 
 </ion-content>
