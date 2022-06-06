@@ -18,13 +18,21 @@
 <ion-content>
 <h6>Tus datos Son </h6>
  
-  <ion-item>
-    <ion-label>Correo</ion-label>
-    
-  </ion-item>
-  <ion-button  (click)="getDatosUser(uie)"></ion-button>
- 
-
-
-
+  
+      
+  
+  <ion-list *ngIf="info">
+    <div>
+      <ion-label>
+        {{info.correo}}
+      </ion-label>
+      <ion-label>
+        {{info.nombre}}
+      </ion-label>
+      <ion-label>
+        {{info.edad}}
+      </ion-label>
+    </div>
+  
+</ion-list>
 </ion-content>

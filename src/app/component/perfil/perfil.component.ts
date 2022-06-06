@@ -50,7 +50,7 @@ listaUsuarios = [];
     if(uid){
       this.uid =uid;
       console.log('uid ->',this.uid);
-      this.getInfoUser();   
+      this.getDatosUser(uid);   
      }else {
       console.log('No existe Id');
   }
@@ -69,6 +69,7 @@ getInfoUser() {
       
   })
 }
+
 obtenerPorId(id) {
 
   this.firestore.getById('Usuarios', id).then(res => {
@@ -80,22 +81,21 @@ obtenerPorId(id) {
   })
 }
 
+
 async getDatosUser(uid: string) {
   const path = 'Usuarios';
   const uiE = await this.authService.getUid();
   this.firestore.getUser().subscribe( res => {
-      //console.log('datos -> ', res);
       if (res) {
-        //res.find['uid'];
+
         console.log('getDatosUser --> ',res);
-       
-        res.forEach(uiseruid => {
-          
-          
-          if (uiE  == uiseruid.uid ) {
-          
-            console.log('Si', uiseruid.correo,uiseruid.nombre);
-              return uiseruid.correo;
+        res.forEach(uiseruid => {  
+
+          if (uiE  == uiseruid.uid ) { 
+            this.info = uiseruid;
+            console.log('Si', uiseruid.correo,uiseruid.nombre,uiseruid.edad);
+              return uiseruid.correo,uiseruid.nombre,uiseruid.edad;
+             
           } 
         });
       }
@@ -103,8 +103,3 @@ async getDatosUser(uid: string) {
 }
 
 }
-/*this.firestore.getUser().subscribe(res => {
-    if (res) {
-      this.listaUsuarios = res;
-    }
-    console.log('datos son -> ', res);*/
