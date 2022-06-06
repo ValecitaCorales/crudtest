@@ -32,7 +32,7 @@
     </ion-card>
   </div>
 
-<<ion-slides [options]="option" class="ion-margin-top">
+<ion-slides [options]="option" class="ion-margin-top">
       
   <ion-slide>
     <ion-card>
@@ -64,14 +64,12 @@
 
 </ion-slides>
 
-<ion-fab vertical="bottom" horizontal="end" slot="fixed"> 
-  <ion-fab-button (click)="addAdop">
-    <ion-icon name="logo-octocat"></ion-icon>
-  </ion-fab-button>
-</ion-fab>
-<ion-fab vertical="bottom" horizontal="start" slot="fixed"> 
-  <ion-fab-button  (click)="volver()" >
-    <ion-icon name="arrow-undo-circle-outline"></ion-icon>
+
+
+
+<ion-fab vertical="bottom" horizontal="center" slot="fixed"> 
+  <ion-fab-button  (click)="addUser()" >
+    <ion-icon name="add-circle-outline"></ion-icon>
   </ion-fab-button>
 </ion-fab>
 

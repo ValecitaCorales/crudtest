@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
-import { userInfo } from 'os';
-import { identity } from 'rxjs';
-import { UserI } from 'src/app/models/models';
 import { AuthService } from '../../service/auth.service'; 
 import { DataService } from '../../service/data.service';
 import { InteracionService } from '../../service/interacion.service'; 
@@ -60,7 +57,7 @@ export class MenuComponent implements OnInit {
         //console.log('datos -> ', res);
         if (res) {
           //res.find['uid'];
-          console.log('getDatosUser --> ',res);
+          //console.log('getDatosUser --> ',res);
          
           res.forEach(uiseruid => {
             

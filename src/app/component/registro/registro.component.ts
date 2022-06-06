@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserI } from 'src/app/models/models';
 import { AuthService } from 'src/app/service/auth.service'; 
-import { DataService } from 'src/app/service/data.service'; 
+import { DataService, UserI } from 'src/app/service/data.service'; 
 import { InteracionService } from 'src/app/service/interacion.service'; 
 
 
@@ -46,7 +45,7 @@ export class RegistroComponent implements OnInit {
       const id = res.user.uid;
       this.datos.uid = id;
       this.datos.password = null
-      await this.firestore.addUser(this.datos)
+      await this.firestore.addUserr(this.datos)
       this.interaction.closeLoading();
       this.interaction.presentToast('registrado con exito');
       this.router.navigate(['/home'])

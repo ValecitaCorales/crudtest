@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationExtras } from '@angular/router';
-import { Observable, using } from 'rxjs';
-import { UserI } from 'src/app/models/models';
+
 import { AuthService } from 'src/app/service/auth.service';
-import { DataService } from 'src/app/service/data.service';
-import { RegistroComponent } from '../registro/registro.component';
+import { DataService, UserI } from 'src/app/service/data.service';
+
 
 @Component({
   selector: 'app-perfil',
@@ -30,8 +28,9 @@ listaUsuarios = [];
    this.authService.stateUser().subscribe(res =>{
       console.log('En perfil - estado de autenticacion',res);
       this.getUid();
+      this.getDatosUser(this.uid);
    });
-   this.firestore.getAll('Usuarios').then(firebaseResponse => {
+   /*this.firestore.getAll('Usuarios').then(firebaseResponse => {
     firebaseResponse.subscribe(listaDeUsuariosRef => {
 
       this.listaUsuarios = listaDeUsuariosRef.map(usuarioRef => {
@@ -42,7 +41,7 @@ listaUsuarios = [];
       console.log(this.listaUsuarios);
 
     })
-  })
+  })*/
   }
 
  async getUid(){
@@ -65,7 +64,7 @@ getInfoUser() {
       if (res) {
         this.listaUsuarios = res;
       }
-      console.log('datos son -> ', res);
+     // console.log('datos son -> ', res);
       
   })
 }

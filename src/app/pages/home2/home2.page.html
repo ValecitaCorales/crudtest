@@ -1,48 +1,51 @@
 <ion-header>
   <ion-toolbar>
-
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-button (click)="logout()">
+        <ion-icon slot="icon-only" name="log-out"></ion-icon>
+      </ion-button>
     </ion-buttons>
-
-    <ion-title>
-    Perdidos
-    </ion-title>
-
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <div class="preview">
-    <ion-avatar (click)="changeImage()">
-      <img *ngIf="profile?.imageUrl; else placeholder_avatar;" [src]="profile.imageUrl">
-      <ng-template #placeholder_avatar>
-        <div class="fallback">
-          <p>Selecciona Avatar</p>
-        </div>
-      </ng-template>
-    </ion-avatar>
-
-  </div>
-
-  <ion-list>
-    <ion-item *ngFor="let find of perdidos" (click)="openNote(note)">
-      <ion-label>
-        Nombre: {{ find.nameM }}
-        <br>
-        color : {{ find.color }}
-        <!--
-          <br>
-        ID: {{ note.id }}-->
-      </ion-label>
-    </ion-item>
-  </ion-list>
-
-
-
+<ion-content>
+  
+<ion-toolbar>
+  <ion-row>
+    <ion-col col-6>
+      <ion-button  (click)="historial()">Historial</ion-button>
+    </ion-col>
+      <ion-col col-6>
+          <ion-button (click)="loadMap()" shape="round" fill="outline">
+            <ion-icon slot="start" name="locate"></ion-icon>
+            </ion-button>
+      </ion-col>
+      </ion-row>
+    </ion-toolbar>
+  
+    <ion-toolbar >
+      <ion-searchbar [(ngModel)]="autocomplete.input" (ionInput)="UpdateSearchResults()" placeholder="Search for a place"  (ionClear)="ClearAutocomplete()"></ion-searchbar>
+    </ion-toolbar>
+    <ion-list [hidden]="autocompleteItems.length == 0">
+      <ion-item *ngFor="let item of autocompleteItems" tappable (click)="SelectSearchResult(item)">
+        {{ item.description }}
+      </ion-item>
+    </ion-list>
+    
+    <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+      <ion-fab-button (click)="ShowCords()" ion-fab color="tertiary">
+        <ion-icon name="information-circle-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    <div class="map-wrapper" style="height: 85%;">      
+      <div id="map_center">
+        <ion-icon name="pin" size="large" color="danger"></ion-icon>      
+      </div>
+      <div #map id="map"  style="height: 85%;"></div>
+    </div>   
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed"> 
-    <ion-fab-button (click)="addFind">
+    <ion-fab-button (click)="addFind()">
       <ion-icon name="heart-dislike-circle-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
@@ -51,5 +54,5 @@
       <ion-icon name="arrow-undo-circle-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  
+
 </ion-content>

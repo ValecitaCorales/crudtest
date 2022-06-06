@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { DataService } from '../../service/data.service';
 import { NavigationExtras, Router} from '@angular/router';
 import { AuthService } from '../../service/auth.service';
+
 
 
 @Component({
@@ -13,16 +14,22 @@ import { AuthService } from '../../service/auth.service';
 export class AdoptamePage {
 
   
+  @Input() isSolicitar:boolean;
+  users = [];
+  contacto: any = {
+    telefono:''};
 
   constructor(private dataService : DataService ,
-               private alertCtrl : AlertController,
                private router: Router,
                private authService: AuthService,
+               private alertController:AlertController
                ) 
                
   {
-    
-    
+    this.dataService.getUser().subscribe(res =>{
+      console.log(res);
+      this.users = res;
+    })
   
     
     
@@ -44,81 +51,78 @@ export class AdoptamePage {
     await this.authService.logut();
     this.router.navigateByUrl('/', {replaceUrl:true});}
 
-async addAdop(){
-  const alert = await this.alertCtrl.create({
-    header :'Formulario de Adopcion',
+async addUser(){
+  const alert = await this.alertController.create({
+    header :'Formulario de Adopción',
     inputs: [
       {
         name : 'nameC',
-        placeholder: 'Ingrese Nombre Completo',
+        placeholder: 'Nombre Completo',
         type:'text'
       },
       {
         name : 'rut',
-        placeholder: 'Ingrese Rut',
-        type:'text'
-      },
-      {
-        name : 'estadoC',
-        placeholder: 'Ingrese estado civil',
-        type:'text'
-      },
-      {
-        name : 'ocupacion',
-        placeholder: 'Ingrese Ocupacion',
+        placeholder: 'Rut',
         type:'text'
       },
       {
         name : 'direccion',
-        placeholder: 'Ingrese Direccion',
+        placeholder: 'Dirección',
         type:'text'
       },
       {
         name : 'tipocasa',
-        placeholder: 'Indique Casa PROPIA/ARRENDADA',
+        placeholder: '¿Casa propia o arrendada?',
         type:'text'
       },
       {
         name : 'permiso',
-        placeholder: 'tiene permiso SI/NO ',
+        placeholder: 'En caso de arriendo, ¿Tiene permiso SÍ/NO? ',
         type:'text'
       },
-      {
-        name : 'integrantesHogar',
-        placeholder: 'Numero integrantes del hogar',
-        type:'text'
-      },
+  
       {
         name : 'telefono',
-        placeholder: 'Ingrese Numero de telefono',
+        placeholder: 'Número de Contacto',
         type:'text'
       },
       {
         name : 'email',
-        placeholder: 'Ingrese imail que se REGISTRO',
+        placeholder: 'Email con el que se registró',
         type:'text'
       },
       {
         name : 'mascota',
-        placeholder: 'Ingrese mascota',
+        placeholder: 'Ingrese mascota que desea adoptar',
         type:'text'
       }
     ],
-
     buttons:[
-        {
-          text : 'Cancela',
-          role : 'cancel'
-        },
-        {
-          text: 'Agregar',
-          handler: (res) => {
-            this.dataService.addAdop({nameC: res.nameC , rut : res.rut ,estadoC :res.estadoC, ocupacion : res.ocupacion ,
-              direccion:res.direccion,tipocasa: res.tipocasa,permiso: res.permiso,integrantesHogar: res.integrantesHogar,
-              telefono:res.telefono,email:res.email, mascota : res.mascota })
-          }
+      {
+        text : 'Cancelar',
+        role : 'cancel'
+      },
+      {
+        text: 'Agregar',
+        handler: (res) => {
+          this.dataService.addUser({nameC: res.nameC , rut : res.rut ,  direccion:res.direccion,tipocasa: res.tipocasa,permiso: res.permiso, telefono:res.telefono,email:res.email, mascota : res.mascota })
+            this.enviarCorreo();
+            this.confirmar();
         }
+      }
     ]
+  });
+  await alert.present();
+ 
+}
+
+async confirmar(){
+  localStorage.setItem('telefono',this.contacto.telefono);
+    const alert = await this.alertController.create({
+    message: 'Se ha enviado tu solicitud!',
+    buttons: [{
+      text: 'Aceptar'       
+    }]
   });
   await alert.present();
 }
@@ -131,6 +135,28 @@ option ={
   autoplay: true, 
 
 }
+
+cancelar(){
+  this.isSolicitar=false;
+}
+
+enviarCorreo(){
+  
+  var feedback = document.createElement('a');
+  feedback.setAttribute('href',
+//cambiar mail de prueba!!!!!!!! 
+  'mailto:Findpets.fundacion@gmail.com?subject=Solcitud%20%20adopción&cc=g.hidalgo@duocuc.cl&body=Solcitud%de%20adopción.'
+  +'%20Contacto:%20'
+  //+ localStorage.getItem(this.contacto.telefono)
+
+  );
+  feedback.click();
+  console.log('mail enviado');
+} 
+
+
+
+
 
 
 }
