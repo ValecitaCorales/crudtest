@@ -2,27 +2,33 @@
 <ion-content class="ion-padding">
   <ion-row></ion-row>
    <ion-row></ion-row>
-      <ion-img src="assets/img/FindPetsICON.png"></ion-img>
-      <div id="label" class="ion-text-center">
-        <ion-label >FindPets</ion-label>
-        <ion-row></ion-row>
-     </div>
+   <ion-img src="assets/img/iconfp.png"></ion-img>
+     
   
-     <ion-item>
+     <ion-item fill ="solid" class="ion-margin-bottom">
        <ion-label>Correo</ion-label>
-       <ion-input [(ngModel)]="credenciales.correo"></ion-input>
+       <ion-input type="email" [(ngModel)]="credenciales.correo"></ion-input>
      </ion-item>
-     <ion-item>
+     <ion-item fill ="solid" class="ion-margin-bottom">
       <ion-label>Contraseña</ion-label>
-      <ion-input [(ngModel)]="credenciales.password"></ion-input>
+      <ion-input type="password" [(ngModel)]="credenciales.password"></ion-input>
     </ion-item>
    
 
-    <ion-button (click)="login()">
-      Ingresar 
+    <ion-button expand="block" type="submit" (click)="login()">
+      Ingresar
+      <ion-icon name="paw-outline"></ion-icon> 
     </ion-button>
-    <ion-button [routerLink]="['/registro']" routerLinkActive="router-link-active" >
-      o registrate
+    <ion-button  expand="block" type="button" [routerLink]="['/registro']" routerLinkActive="router-link-active" >
+      Registrate
+      <ion-icon name="person-add-outline"></ion-icon>
     </ion-button>
-
+<ion-row></ion-row>
+<ion-row></ion-row>
+    <ion-footer class="ion-text-center">
+      <br> @Grupo3 2022 
+      <br>DuocUC
+     
+    </ion-footer>
+  
 </ion-content>

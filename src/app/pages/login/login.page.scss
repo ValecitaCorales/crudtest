@@ -1,5 +1,5 @@
 ion-img {
-    max-width: 45%;
+    max-width: 80%;
     padding: 1rem;
     margin: 0 auto;
     float: center;
@@ -12,7 +12,7 @@ ion-item{
     border-radius: 30px !important;
     width: 250px;
     border-color: black!important;
-    background: #62E8E0;
+    --background:#E8DAEF;
 }
 
 ion-title.title-large {
@@ -20,6 +20,10 @@ ion-title.title-large {
         border-color: black!important;
         font-size: 30px;
         font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+.ion-text-center{
+    color: #B05993;
 }
 
 ion-header{

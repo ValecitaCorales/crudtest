@@ -4,10 +4,15 @@ ion-toolbar{
 ion-title{
   color: #B05993;
   border-color: black;
-  font-size: 30px;
+  font-size: 14px;
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
 }
-
+ion-img {
+  max-width: 100%;
+  padding: 1rem;
+  margin: 0 auto;
+  float: center;
+}
 
 ion-card{
   border-radius:30px !important;

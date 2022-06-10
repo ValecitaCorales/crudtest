@@ -29,12 +29,18 @@ const routes: Routes = [
     path: 'adoptame',
     loadChildren: () => import('./pages/adoptame/adoptame.module').then( m => m.AdoptamePageModule)
   },
+  {
+    path: 'foto-perdidos',
+    loadChildren: () => import('./pages/foto-perdidos/foto-perdidos.module').then( m => m.FotoPerdidosPageModule)
+  },
  
   { path: 'perfil', component: PerfilComponent, },
 
   {path : 'registro',component:RegistroComponent}
   ,
   {path : 'menu',component:MenuComponent},
+  
+  
   {
     path: '**',
     redirectTo: '',

@@ -5,14 +5,18 @@ import { Observable } from 'rxjs';
 import { AngularFirestore, } from '@angular/fire/compat/firestore';
 
 
+
 export interface Perdidos{
   id?: string;
   nameM : string;
   tipoM : string;
   color: string;
   tamano: string;
-  direccion: string;
+  direccion: any;
   fecha: string;
+  name:any;
+  path:any;
+  data:any;
 }
 
 
@@ -51,7 +55,8 @@ export interface Adoptame
 export class DataService {
   
   constructor( private fireStore : AngularFirestore,
-               private fireservice :Firestore
+               private fireservice :Firestore,
+               
                 ) { }
 
  //TODO ESTO PARA AGREGAR USUARIO DE FORMULARIO  
@@ -62,7 +67,7 @@ addUserr(datos: UserI){
   return addDoc(notesRef, datos)}
 
 addFind(find:Perdidos){
-    const findRef = collection(this.fireservice,'perdidos');
+    const findRef = collection(this.fireservice,'Perdidos');
     return addDoc(findRef,find)
     }
 
@@ -78,7 +83,7 @@ addUser(adop: Adoptame){
   return collectionData(usuaRef,{idField:'id'}) as Observable<Adoptame[]> ;
 }
 getFind(): Observable<Perdidos[]>{
-  const findRef = collection(this.fireservice,'perdidos');
+  const findRef = collection(this.fireservice,'Perdidos');
   return collectionData(findRef,{idField:'id'}) as Observable<Perdidos[]> ;
   }
 
@@ -122,5 +127,7 @@ async getById(collection,id){
       console.log("error en: create ", error)
     }
   }
+  
+
 }
 
