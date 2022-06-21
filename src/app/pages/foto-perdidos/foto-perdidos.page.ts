@@ -24,8 +24,8 @@ export class FotoPerdidosPage implements OnInit {
  
   perdidos = [];
   profile = null;
-  images: Historial[] = [];
-
+ 
+  private _storage: Storage | null = null;
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -45,54 +45,9 @@ export class FotoPerdidosPage implements OnInit {
   }
 
   ngOnInit() {
-   this.loadFiles()
+  
   }
 
-async loadFiles(){
-  this.images=[];
-
-  const loading = await this.loadingController.create({
-    message:'Cargando...'
-  });
-  await loading.present();
-
-  Filesystem.readdir({
-    directory: Directory.Data,
-    path: IMAGE_DIR
-  }).then(result =>{
-
-  console.log('HERE: ', result);
-  this.loadFileData(result.files);
-
-  }, async err =>{
-    console.log('err: ', err);
-    await Filesystem.mkdir({
-      directory: Directory.Data,
-      path: IMAGE_DIR
-    });
-  }).then (_ =>{
-      loading.dismiss();
-    })
-
-}
-
-async loadFileData(fileNames: string[]){
-   for (let file of fileNames){
-     const filePath = `${IMAGE_DIR}/${file}`;
-
-     const readFile = await Filesystem.readFile({
-       directory: Directory.Data,
-       path: filePath
-     });
-
-     this.images.push({
-       name: file,
-       path: filePath,
-       data: `data:image/jpeg;base64,${readFile.data}`
-     });
- 
-   }
-}
 
   volver(){
     let navigationExtras: NavigationExtras={

@@ -11,13 +11,10 @@ import { Directory, Filesystem } from '@capacitor/filesystem';
 
 
 declare var google: any;
-const IMAGE_DIR = 'upload';
 
-interface Perdidos{
-  name:string;
-  path: string;
-  data: string;
-}
+
+
+
 @Component({
   selector: 'app-home2',
   templateUrl: './home2.page.html',
@@ -25,10 +22,10 @@ interface Perdidos{
 })
 export class Home2Page implements OnInit {
 
-  perdidos = [];
-  profile = null;
- 
-  images: Perdidos[] = [];
+  perdidos = []; 
+  profile = null ; 
+  private _storage: Storage | null = null;
+
 
 
   @ViewChild('map',{static:false}) mapElement:ElementRef;
@@ -72,8 +69,7 @@ export class Home2Page implements OnInit {
 
   ngOnInit(){
     this.loadMap();
-    this.loadFiles()
-
+    
   
   }
 
@@ -93,111 +89,37 @@ export class Home2Page implements OnInit {
   
   //foto mascota perdida
   
-async loadFiles(){
-  this.images=[];
-
-  const loading = await this.loadingController.create({
-    message:'Cargando...'
-  });
-  await loading.present();
-
-  Filesystem.readdir({
-    directory: Directory.Data,
-    path: IMAGE_DIR
-  }).then(result =>{
-
-  console.log('HERE: ', result);
-  this.loadFileData(result.files);
-
-  }, async err =>{
-    console.log('err: ', err);
-    await Filesystem.mkdir({
-      directory: Directory.Data,
-      path: IMAGE_DIR
-    });
-  }).then (_ =>{
-      loading.dismiss();
-    })
-
-}
-
-async loadFileData(fileNames: string[]){
-   for (let file of fileNames){
-     const filePath = `${IMAGE_DIR}/${file}`;
-
-     const readFile = await Filesystem.readFile({
-       directory: Directory.Data,
-       path: filePath
-     });
-
-     this.images.push({
-       name: file,
-       path: filePath,
-       data: `data:image/jpeg;base64,${readFile.data}`
-     });
- 
-   }
-}
-async selectImage(){
+ async changeImage(){
   const image = await Camera.getPhoto({
     quality:90,
-    allowEditing: false,
-    resultType: CameraResultType.Uri,
-    source: CameraSource.Photos,  //.Camera  para tomar fotos
+    allowEditing:false,
+    resultType:CameraResultType.Base64,
+    source: CameraSource.Photos,
   });
-  console.log(image); //para ver si carga la img
+  console.log(Image);
+  if(Image){
+    const loadingController = await this.loadingController.create();
+    await loadingController.present();
 
-  if (image){
-    this.saveImage(image);
+    const result = await this.avatarService.uploadImage(image);
+    loadingController.dismiss();
+    if(result){
+      const alert = await this.alertController.create({
+        header:'Si se puso subir la imagen',
+        message:'Foto Agregada  ',
+        buttons:['OK'],
+      });
+      await alert.present();
+    }
   }
-}
-
-async saveImage(photo:Photo){
-
-const base64Data = await this.readAsBase64(photo);
-console.log(base64Data);
-const fileName = new Date().getTime() + '.jpeg';
-const savedFile = await Filesystem.writeFile({
-  directory: Directory.Data,
-  path: `${IMAGE_DIR}/${fileName}`,
-  data: base64Data,
-});
-console.log('saved: ', savedFile);
-this.loadFiles();
-}
-
-async readAsBase64(photo: Photo) {
-
-if (this.platform.is('hybrid')) {
-  const file = await Filesystem.readFile({
-    path: photo.path
-  });
-
-  return file.data;
-}
-else {
-  const response = await fetch(photo.webPath);
-  const blob = await response.blob();
-
-  return await this.convertBlobToBase64(blob) as string;
-}
-}
-
-convertBlobToBase64 = (blob: Blob) => new Promise((resolve, reject) => {
-const reader = new FileReader();
-reader.onerror = reject;
-reader.onload = () => {
-    resolve(reader.result);
-};
-reader.readAsDataURL(blob);
-});
-
-
+ }
+ imgUrl : any;
   //formulario
   async addFind(){
     const alert = await this.alertController.create({
       header :'Ingrese Mascota Extraviada',
       inputs: [
+       
         {
           name : 'nameM',
           placeholder: 'Ingrese Nombre de la mascota',
@@ -233,15 +155,18 @@ reader.readAsDataURL(blob);
           text: 'Agregar',
           handler: (res) => {
             this.dataService.addFind({nameM : res.nameM,tipoM : res.tipoM , color: res.color,
-            tamano :res.tamano, direccion: this.placeid, fecha: res.fecha, name:this.images ,path: this.images, data:this.images})
+            tamano :res.tamano, direccion: this.placeid, fecha: res.fecha})
           
           }
         }
       ]
+      
     });
+    //this.imgUrl = this.changeImage();
+    //console.log(this.imgUrl);
     await alert.present();
   }
-  
+ 
 //
 async logout(){
   await this.authService.logut();

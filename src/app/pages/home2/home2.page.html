@@ -24,23 +24,19 @@
       </ion-col>
         </ion-row>
       </ion-toolbar>
-    
+    <div class="ion-padding">
+      <ion-card >
+        <img *ngIf="profile?.imageUrl; else placeholder_avatar;" [src]="profile.imageUrl" >
+
+      </ion-card>
+    </div>
   <ion-toolbar>
-    <ion-button fill ="clear" expand="full" color="light" (click)="selectImage()">
+    <ion-button fill ="clear" expand="full" color="light" (click)="changeImage()">
       <ion-icon slot ="start" name="camera"></ion-icon>
      Ingresa una foto
     </ion-button>
   </ion-toolbar>
-  <ion-list *ngIf ="images.lenght == 0" class="ion-padding ion-text-center"> 
-      <ion-item *ngFor ="let file of images">
-      <ion-thumbnail>
-        <ion-img [src] ="file.data"></ion-img>
-      </ion-thumbnail>
-      <ion-label class ="ion-text-wrap">
-        {{file.name}}
-        </ion-label>
-      </ion-item>
-    </ion-list>
+    
   
     <ion-toolbar >
       <ion-searchbar [(ngModel)]="autocomplete.input" (ionInput)="UpdateSearchResults()" placeholder="Search for a place"  (ionClear)="ClearAutocomplete()"></ion-searchbar>

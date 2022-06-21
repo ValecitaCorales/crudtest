@@ -14,9 +14,7 @@ export interface Perdidos{
   tamano: string;
   direccion: any;
   fecha: string;
-  name:any;
-  path:any;
-  data:any;
+  
 }
 
 
