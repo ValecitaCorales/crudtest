@@ -14,6 +14,8 @@ export interface Perdidos{
   tamano: string;
   direccion: any;
   fecha: string;
+  imagenLink : string ;
+
   
 }
 

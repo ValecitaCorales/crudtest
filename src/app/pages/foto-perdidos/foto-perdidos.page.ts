@@ -23,9 +23,10 @@ interface Historial{
 export class FotoPerdidosPage implements OnInit {
  
   perdidos = [];
-  profile = null;
+  profile : {}  ;
+  imagenLink : string = '';
  
-  private _storage: Storage | null = null;
+
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -35,9 +36,13 @@ export class FotoPerdidosPage implements OnInit {
     private loadingController : LoadingController,
   )  
   {
-    this.avatarService.getUserProfile().subscribe((data => {
+   /* this.avatarService.getUserProfile().subscribe((data => {
       this.profile = data;
-    }));
+      this.imagenLink = this.profile['imageUrl'];
+      console.log('aqui el url -->>>',this.profile['imageUrl']);
+    }));*/
+
+
     this.dataService.getFind().subscribe(res => {
       console.log(res);
       this.perdidos = res;

@@ -33,7 +33,7 @@ getUserProfile(){
 //const path= `uploads/${user.uid}/profile.png`;
 async uploadImage(cameraFile: Photo){
   const user= this.auth.currentUser;
-  const path= `uploads/${user.uid}.png`;
+  const path= `uploads/${Date.now()}.${user.uid}.png`;
   const storageRef = ref(this.storage, path);
  
   try {
@@ -41,10 +41,11 @@ async uploadImage(cameraFile: Photo){
     const imageUrl = await getDownloadURL(storageRef); // almacenar en firebase
 
     const userDocRef = doc(this.firestore, `imgUrl/${user.uid}`);
+    
 
      //this.Perdidos.imgUrl =  imageUrl ;
 
-    console.log(imageUrl);
+    console.log('desde AvatarService -->>',imageUrl);
     await setDoc(userDocRef, {
       imageUrl
     });

@@ -25,7 +25,7 @@ export class Home2Page implements OnInit {
   perdidos = []; 
   profile = null ; 
   private _storage: Storage | null = null;
-
+  imagenLink : string ='';
 
 
   @ViewChild('map',{static:false}) mapElement:ElementRef;
@@ -57,11 +57,17 @@ export class Home2Page implements OnInit {
   {
     this.avatarService.getUserProfile().subscribe((data => {
       this.profile = data;
+      this.imagenLink = this.profile['imageUrl'];
+      console.log('desde home2',this.imagenLink)
     }));
+
+
     this.dataService.getFind().subscribe(res => {
       console.log(res);
       this.perdidos = res;
     })
+
+
     this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
     this.autocomplete = { input: '' };
     this.autocompleteItems = [];
@@ -155,7 +161,7 @@ export class Home2Page implements OnInit {
           text: 'Agregar',
           handler: (res) => {
             this.dataService.addFind({nameM : res.nameM,tipoM : res.tipoM , color: res.color,
-            tamano :res.tamano, direccion: this.placeid, fecha: res.fecha})
+            tamano :res.tamano, direccion: this.placeid, fecha: res.fecha , imagenLink : this.imagenLink})
           
           }
         }
