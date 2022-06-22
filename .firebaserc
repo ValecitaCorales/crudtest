@@ -1,13 +1,13 @@
 {
   "projects": {
     "default": "firebaseConfig",
-    "findpets": "findpet550"
+    "findpets": "findpets551"
   },
   "targets": {
     "findpets551": {
       "hosting": {
         "app": [
-          "findpet550"
+          "findpets551"
         ]
       }
     }
